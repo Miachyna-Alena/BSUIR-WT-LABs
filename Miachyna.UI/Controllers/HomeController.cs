@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Miachyna.UI.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
 
@@ -28,7 +30,7 @@ namespace Miachyna.UI.Controllers
 
         public IActionResult Index()
         {
-            ViewData["LabTitle"] = "Laboratory work 02";
+            ViewData["LabTitle"] = "Laboratory work 03";
             SelectList data = new SelectList(_listData, "Id", "Name");
             return View(data);
         }
