@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Miachyna.UI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241218124750_Start")]
+    [Migration("20241219120059_Start")]
     partial class Start
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace Miachyna.UI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);

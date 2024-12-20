@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using Miachyna.UI.Services.CategoryServices;
+using Miachyna.UI.Services.CosmeticServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +33,9 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddSingleton<IEmailSender, NoOpEmailSender>();
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<ICategoryService, MemoryCategoryService>();
+builder.Services.AddScoped<ICosmeticService, MemoryCosmeticService>();
 
 var app = builder.Build();
 
