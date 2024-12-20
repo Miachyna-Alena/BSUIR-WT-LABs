@@ -8,7 +8,9 @@ namespace Miachyna.UI.Controllers
     [Authorize]
     public class ProductController(ICategoryService categoryService, ICosmeticService cosmeticService) : Controller
     {
-        public async Task<IActionResult> Index(string? category)
+        [Route("Catalog")]
+        [Route("Catalog/{category}")]
+        public async Task<IActionResult> Index(string? category, int pageNo = 1)
         {
             var categoriesResponse = await categoryService.GetCategoryListAsync();
 
@@ -21,11 +23,11 @@ namespace Miachyna.UI.Controllers
 
             ViewData["currentCategory"] = currentCategory;
 
-            var productResponse = await cosmeticService.GetCosmeticListAsync(category);
+            var productResponse = await cosmeticService.GetCosmeticListAsync(category, pageNo);
 
             if (!productResponse.Success)
                 ViewData["Error"] = productResponse.ErrorMessage;
-            return View(productResponse.Data.Items);
+            return View(productResponse.Data);
         }
     }
 }

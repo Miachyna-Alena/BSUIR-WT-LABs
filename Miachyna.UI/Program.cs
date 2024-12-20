@@ -37,6 +37,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICategoryService, MemoryCategoryService>();
 builder.Services.AddScoped<ICosmeticService, MemoryCosmeticService>();
 
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

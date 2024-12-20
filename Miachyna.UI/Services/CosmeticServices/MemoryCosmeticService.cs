@@ -1,16 +1,20 @@
 ﻿using Miachyna.Domain.Entities;
 using Miachyna.Domain.Models;
 using Miachyna.UI.Services.CategoryServices;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Miachyna.UI.Services.CosmeticServices
 {
     public class MemoryCosmeticService : ICosmeticService
     {
+        IConfiguration _config;
         List<Cosmetic> _cosmetic;
         List<Category> _categories;
 
-        public MemoryCosmeticService(ICategoryService categoryService)
+
+        public MemoryCosmeticService([FromServices] IConfiguration config, ICategoryService categoryService)
         {
+            _config = config;
             _categories = categoryService.GetCategoryListAsync()
                 .Result
                 .Data;
@@ -106,7 +110,27 @@ namespace Miachyna.UI.Services.CosmeticServices
 
             var data = _cosmetic.Where(d => categoryId == null || d.CategoryId.Equals(categoryId))?.ToList();
 
-            result.Data = new ListModel<Cosmetic>() { Items = data };
+            int pageSize = _config.GetSection("Pagination:ItemsPerPage").Get<int>();
+
+            int totalPages;
+            if (pageSize == 0)
+            {
+                pageSize = -1;
+                totalPages = 1;
+            }
+            else
+            {
+                totalPages = (int)Math.Ceiling(data.Count / (double)pageSize);
+            }
+
+            var listData = new ListModel<Cosmetic>()
+            {
+                Items = data.Skip((pageNo - 1) * pageSize).Take(pageSize).ToList(),
+                CurrentPage = pageNo,
+                TotalPages = totalPages
+            };
+
+            result.Data = listData;
 
             if (data.Count == 0)
             {
