@@ -34,8 +34,8 @@ builder.Services.AddSingleton<IEmailSender, NoOpEmailSender>();
 
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<ICategoryService, MemoryCategoryService>();
-builder.Services.AddScoped<ICosmeticService, MemoryCosmeticService>();
+builder.Services.AddHttpClient<ICategoryService, ApiCategoryService>(opt => opt.BaseAddress = new Uri("https://localhost:7002/api/categories/"));
+builder.Services.AddHttpClient<ICosmeticService, ApiCosmeticService>(opt => opt.BaseAddress = new Uri("https://localhost:7002/api/cosmetics/"));
 
 builder.Services.AddHttpContextAccessor();
 

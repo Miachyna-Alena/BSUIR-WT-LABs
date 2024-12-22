@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miachyna.UI", "Miachyna.UI\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miachyna.Domain", "Miachyna.Domain\Miachyna.Domain.csproj", "{3A29979C-0639-4DF5-948F-85804C9539B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miachyna.API", "Miachyna.API\Miachyna.API.csproj", "{F05F8900-91F6-415F-A8D0-9CC94A626598}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3A29979C-0639-4DF5-948F-85804C9539B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A29979C-0639-4DF5-948F-85804C9539B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A29979C-0639-4DF5-948F-85804C9539B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F05F8900-91F6-415F-A8D0-9CC94A626598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F05F8900-91F6-415F-A8D0-9CC94A626598}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F05F8900-91F6-415F-A8D0-9CC94A626598}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F05F8900-91F6-415F-A8D0-9CC94A626598}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

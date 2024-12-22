@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "Miachyna.UI\\Miachyna.UI.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Miachyna.API\\Miachyna.API.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
