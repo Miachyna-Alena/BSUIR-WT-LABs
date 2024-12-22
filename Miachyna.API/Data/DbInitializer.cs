@@ -6,13 +6,11 @@ namespace Miachyna.API.Data
     {
         public static async Task SeedData(WebApplication app)
         {
-            // Uri проекта
             var uri = "https://localhost:7002/";
-            // Получение контекста БД
+
             using var scope = app.Services.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-            // Заполнение данными
             if (!context.Categories.Any() && !context.Cosmetics.Any())
             {
                 var categories = new Category[]

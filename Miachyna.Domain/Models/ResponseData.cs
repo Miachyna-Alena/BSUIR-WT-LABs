@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Miachyna.Domain.Models
+﻿namespace Miachyna.Domain.Models
 {
     public class ResponseData<T>
     {

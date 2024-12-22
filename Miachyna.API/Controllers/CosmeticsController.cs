@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Miachyna.API.Data;
 using Miachyna.Domain.Entities;
 using Miachyna.Domain.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Miachyna.API.Controllers
 {
@@ -17,10 +11,12 @@ namespace Miachyna.API.Controllers
     public class CosmeticsController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IWebHostEnvironment _env;
 
-        public CosmeticsController(AppDbContext context)
+        public CosmeticsController(AppDbContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: api/Cosmetics
@@ -44,9 +40,9 @@ namespace Miachyna.API.Controllers
             var listData = new ListModel<Cosmetic>()
             {
                 Items = await data
-                .Skip((pageNo - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync(),
+                    .Skip((pageNo - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync(),
                 CurrentPage = pageNo,
                 TotalPages = totalPages
             };
@@ -77,7 +73,6 @@ namespace Miachyna.API.Controllers
         }
 
         // PUT: api/Cosmetics/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCosmetic(int id, Cosmetic cosmetic)
         {
@@ -108,7 +103,6 @@ namespace Miachyna.API.Controllers
         }
 
         // POST: api/Cosmetics
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Cosmetic>> PostCosmetic(Cosmetic cosmetic)
         {
@@ -116,6 +110,30 @@ namespace Miachyna.API.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCosmetic", new { id = cosmetic.Id }, cosmetic);
+        }
+
+        [HttpPost("{id}")]
+        public async Task<IActionResult> SaveImage(int id, IFormFile image)
+        {
+            var cosmetic = await _context.Cosmetics.FindAsync(id);
+
+            if (cosmetic == null)
+            {
+                return NotFound();
+            }
+
+            var imagesPath = Path.Combine(_env.WebRootPath, "Images");
+            var randomName = Path.GetRandomFileName();
+            var extension = Path.GetExtension(image.FileName);
+            var fileName = Path.ChangeExtension(randomName, extension);
+            var filePath = Path.Combine(imagesPath, fileName);
+            using var stream = System.IO.File.OpenWrite(filePath);
+            await image.CopyToAsync(stream);
+            var host = "https://" + Request.Host;
+            var url = $"{host}/Images/{fileName}";
+            cosmetic.Image = url;
+            await _context.SaveChangesAsync();
+            return Ok();
         }
 
         // DELETE: api/Cosmetics/5

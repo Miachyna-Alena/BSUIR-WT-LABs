@@ -26,8 +26,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("admin", p =>
-    p.RequireClaim(ClaimTypes.Role, "admin"));
+    options.AddPolicy("admin", p => p.RequireClaim(ClaimTypes.Role, "admin"));
 });
 
 builder.Services.AddSingleton<IEmailSender, NoOpEmailSender>();
