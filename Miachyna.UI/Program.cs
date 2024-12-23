@@ -2,11 +2,17 @@ using Miachyna.UI.Data;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
 using Miachyna.UI.Services.CategoryServices;
 using Miachyna.UI.Services.CosmeticServices;
+using Serilog;
+using Miachyna.UI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -38,6 +44,9 @@ builder.Services.AddHttpClient<ICosmeticService, ApiCosmeticService>(opt => opt.
 
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -56,6 +65,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
+
+app.UseFileLogger();
 
 app.UseAuthorization();
 

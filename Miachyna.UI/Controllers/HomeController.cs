@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Serilog;
 
 namespace Miachyna.UI.Controllers
 {
@@ -30,7 +31,7 @@ namespace Miachyna.UI.Controllers
 
         public IActionResult Index()
         {
-            ViewData["LabTitle"] = "Laboratory work 07";
+            ViewData["LabTitle"] = "Laboratory work 08";
             SelectList data = new SelectList(_listData, "Id", "Name");
             return View(data);
         }

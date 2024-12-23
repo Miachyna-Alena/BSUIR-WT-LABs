@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Miachyna.Domain.Models;
+using Miachyna.UI.Extensions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Miachyna.UI.Components
 {
@@ -6,7 +8,8 @@ namespace Miachyna.UI.Components
     {
         public IViewComponentResult Invoke()
         {
-            return View();
+            var cart = HttpContext.Session.Get<Cart>("cart");
+            return View(cart);
         }
     }
 }
