@@ -5,9 +5,11 @@ VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miachyna.UI", "Miachyna.UI\Miachyna.UI.csproj", "{8837B9F2-85CE-4ECB-9FAA-31CE761E630B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miachyna.Domain", "Miachyna.Domain\Miachyna.Domain.csproj", "{3A29979C-0639-4DF5-948F-85804C9539B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miachyna.Domain", "Miachyna.Domain\Miachyna.Domain.csproj", "{3A29979C-0639-4DF5-948F-85804C9539B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miachyna.API", "Miachyna.API\Miachyna.API.csproj", "{F05F8900-91F6-415F-A8D0-9CC94A626598}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miachyna.API", "Miachyna.API\Miachyna.API.csproj", "{F05F8900-91F6-415F-A8D0-9CC94A626598}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miachyna.Blazor", "Miachyna.Blazor\Miachyna.Blazor.csproj", "{2529383B-FC0C-4F4F-8CD1-4D340D34F224}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{F05F8900-91F6-415F-A8D0-9CC94A626598}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F05F8900-91F6-415F-A8D0-9CC94A626598}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F05F8900-91F6-415F-A8D0-9CC94A626598}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2529383B-FC0C-4F4F-8CD1-4D340D34F224}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2529383B-FC0C-4F4F-8CD1-4D340D34F224}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2529383B-FC0C-4F4F-8CD1-4D340D34F224}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2529383B-FC0C-4F4F-8CD1-4D340D34F224}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

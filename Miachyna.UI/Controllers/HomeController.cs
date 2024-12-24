@@ -31,7 +31,7 @@ namespace Miachyna.UI.Controllers
 
         public IActionResult Index()
         {
-            ViewData["LabTitle"] = "Laboratory work 08";
+            ViewData["LabTitle"] = "Laboratory work 09";
             SelectList data = new SelectList(_listData, "Id", "Name");
             return View(data);
         }

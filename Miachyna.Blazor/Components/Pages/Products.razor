@@ -1,0 +1,31 @@
+﻿@page "/products"
+@rendermode InteractiveServer
+@using Miachyna.Blazor.Services
+@using Miachyna.Domain.Entities
+@using Miachyna.Domain.Models
+@using Miachyna.Blazor.Components.ProductComponents
+
+<CascadingValue Value = "ProductService">
+    <CosmeticsList CosmeticSelected = "ShowDetails" />
+    <Pager />
+</CascadingValue>
+
+<CosmeticDetails Cosmetic = "SelectedCosmetic" />
+
+@code {
+    [Inject] IProductService<Cosmetic> ProductService { get; set; }
+
+    [Parameter]
+    public Cosmetic SelectedCosmetic { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ProductService.GetProducts();
+    }
+    
+    void ShowDetails(int id)
+    {
+        SelectedCosmetic = ProductService.Products.First(d => d.Id == id);
+    }
+}

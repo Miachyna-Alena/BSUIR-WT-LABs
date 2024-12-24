@@ -1,0 +1,49 @@
+﻿@using Miachyna.Blazor.Services
+@using Miachyna.Domain.Entities
+@implements IDisposable
+@rendermode InteractiveServer
+
+<h3>Cosmetics List</h3>
+
+@if (ProductService.Products != null && ProductService.Products.Count() != 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <th>Name</th><th></th>
+            @foreach (var item in ProductService.Products)
+            {
+            <tr>
+                <td>@item.Name</td>
+                <td>
+                    <button class="btn btn-outline-dark"
+                        @onclick="@(()=>OnCosmeticSelected(item.Id))">
+                        Details
+                    </button>
+                </td>
+            </tr>
+            }
+        </thead>
+    </table>
+}
+
+@code {
+    [CascadingParameter]
+    public IProductService<Cosmetic> ProductService { get; set; }
+
+    [Parameter]
+    public EventCallback<int> CosmeticSelected { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        ProductService.ListChanged += StateHasChanged;
+    }
+
+    public async void OnCosmeticSelected(int id)
+    {
+        await CosmeticSelected.InvokeAsync(id);
+    }
+    public void Dispose()
+    {
+        ProductService.ListChanged -= StateHasChanged;
+    }
+}
